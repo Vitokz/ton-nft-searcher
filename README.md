@@ -1,4 +1,4 @@
-# Gateway Service Documentation
+#  Searcher Service Documentation
 
 [1. Инструкции по запуску](#Запуск-сервиса)\
 [2. Дополнительные полезные команды](#Дополнительные-полезные-команды)\
