@@ -1,0 +1,284 @@
+{
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "schemes": [
+    "http"
+  ],
+  "swagger": "2.0",
+  "info": {
+    "title": "Searcher.",
+    "version": "0.0.1"
+  },
+  "host": "localhost:8083",
+  "basePath": "/",
+  "paths": {
+    "/user/nft_items": {
+      "get": {
+        "description": "Get user nft items",
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "backend"
+        ],
+        "operationId": "nft_items",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "NFT owner address in human format\n",
+            "name": "owner",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "description": "Collection address in human format\n",
+            "name": "collection",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "description": "Limit of NFTs in request\n",
+            "name": "limit",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "description": "Offset of NFTs in request\n",
+            "name": "offset",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "user nfts",
+            "schema": {
+              "type": "object",
+              "example": {
+                "nft_items": [
+                  {
+                    "address": "EQDwipfknWmyUJjknngMM_r6DpWaYqC0u3SxuzOnAFQG9wjE",
+                    "approved_by": [
+                      "GetGems"
+                    ],
+                    "collection": {
+                      "address": "EQDwipfknWmyUJjknngMM_r6DpWaYqC0u3SxuzOnAFQG9wjE",
+                      "name": "some_collection_name"
+                    },
+                    "collection_address": "EQDwipfknWmyUJjknngMM_r6DpWaYqC0u3SxuzOnAFQG9wjE",
+                    "index": 100,
+                    "metadata": {
+                      "attributes": [
+                        {
+                          "trait_type": "Rarity",
+                          "value": "Epic"
+                        }
+                      ],
+                      "image": "some_image_url.png",
+                      "name": "some_name"
+                    },
+                    "owner": {
+                      "address": "EQDwipfknWmyUJjknngMM_r6DpWaYqC0u3SxuzOnAFQG9wjE",
+                      "is_scam": false
+                    },
+                    "previews": [
+                      {
+                        "resolution": "100x100",
+                        "url": "some_url.webp"
+                      }
+                    ],
+                    "verified": true
+                  }
+                ]
+              }
+            }
+          },
+          "400": {
+            "description": "bad request",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string"
+                }
+              },
+              "example": {
+                "message": "invalid address"
+              }
+            }
+          },
+          "500": {
+            "description": "internal server error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string"
+                }
+              },
+              "example": {
+                "message": "internal server error"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Attribute": {
+      "description": "Attribute is nft attribute",
+      "type": "object",
+      "properties": {
+        "trait_type": {
+          "type": "string",
+          "x-go-name": "TraitType"
+        },
+        "value": {
+          "x-go-name": "Value"
+        }
+      },
+      "x-go-package": "github.com/Vitokz/ton-nft-searcher/internal/http_server/types"
+    },
+    "Attributes": {
+      "description": "Attributes is array of NFT attributes",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Attribute"
+      },
+      "x-go-package": "github.com/Vitokz/ton-nft-searcher/internal/http_server/types"
+    },
+    "Collection": {
+      "type": "object",
+      "properties": {
+        "address": {
+          "type": "string",
+          "x-go-name": "Address"
+        },
+        "name": {
+          "type": "string",
+          "x-go-name": "Name"
+        }
+      },
+      "x-go-package": "github.com/Vitokz/ton-nft-searcher/internal/http_server/types"
+    },
+    "Metadata": {
+      "description": "Metadata is NFT item meta",
+      "type": "object",
+      "properties": {
+        "attributes": {
+          "$ref": "#/definitions/Attributes"
+        },
+        "image": {
+          "type": "string",
+          "x-go-name": "Image"
+        },
+        "name": {
+          "type": "string",
+          "x-go-name": "Name"
+        }
+      },
+      "x-go-package": "github.com/Vitokz/ton-nft-searcher/internal/http_server/types"
+    },
+    "NFTItem": {
+      "type": "object",
+      "properties": {
+        "address": {
+          "type": "string",
+          "x-go-name": "Address"
+        },
+        "approved_by": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-go-name": "ApprovedBy"
+        },
+        "collection": {
+          "$ref": "#/definitions/Collection"
+        },
+        "collection_address": {
+          "type": "string",
+          "x-go-name": "CollectionAddress"
+        },
+        "index": {
+          "type": "integer",
+          "format": "int64",
+          "x-go-name": "Index"
+        },
+        "metadata": {
+          "$ref": "#/definitions/Metadata"
+        },
+        "owner": {
+          "$ref": "#/definitions/NFTOwner"
+        },
+        "previews": {
+          "$ref": "#/definitions/Previews"
+        },
+        "verified": {
+          "type": "boolean",
+          "x-go-name": "Verified"
+        }
+      },
+      "x-go-package": "github.com/Vitokz/ton-nft-searcher/internal/http_server/types"
+    },
+    "NFTItems": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/NFTItem"
+      },
+      "x-go-package": "github.com/Vitokz/ton-nft-searcher/internal/http_server/types"
+    },
+    "NFTOwner": {
+      "description": "NFTOwner is owner of nft",
+      "type": "object",
+      "properties": {
+        "address": {
+          "type": "string",
+          "x-go-name": "Address"
+        },
+        "is_scam": {
+          "type": "boolean",
+          "x-go-name": "IsScam"
+        }
+      },
+      "x-go-package": "github.com/Vitokz/ton-nft-searcher/internal/http_server/types"
+    },
+    "Preview": {
+      "description": "Preview if NFT preview",
+      "type": "object",
+      "properties": {
+        "resolution": {
+          "type": "string",
+          "x-go-name": "Resolution"
+        },
+        "url": {
+          "type": "string",
+          "x-go-name": "URL"
+        }
+      },
+      "x-go-package": "github.com/Vitokz/ton-nft-searcher/internal/http_server/types"
+    },
+    "Previews": {
+      "description": "Previews is array of previews",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Preview"
+      },
+      "x-go-package": "github.com/Vitokz/ton-nft-searcher/internal/http_server/types"
+    },
+    "UserNFTsResponse": {
+      "description": "UserNFTsResponse is response to user nfts request",
+      "type": "object",
+      "properties": {
+        "nft_items": {
+          "$ref": "#/definitions/NFTItems"
+        }
+      },
+      "x-go-package": "github.com/Vitokz/ton-nft-searcher/internal/http_server/transport"
+    }
+  }
+}
