@@ -34,7 +34,6 @@ type Server struct {
 func New(config Config, useCases UseCases, logger zerolog.Logger) *Server {
 	e := echo.New()
 	e.Use(middleware.Logger())
-	//e.Use(middleware.Recover())
 
 	logger = logger.With().Str("module", "http-server").Logger()
 

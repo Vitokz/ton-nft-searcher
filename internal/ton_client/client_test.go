@@ -5,10 +5,6 @@ import (
 	"net/url"
 	"testing"
 
-	"github.com/tonkeeper/tongo"
-
-	"github.com/tonkeeper/tongo"
-
 	"github.com/stretchr/testify/require"
 	"github.com/tonkeeper/tongo"
 )

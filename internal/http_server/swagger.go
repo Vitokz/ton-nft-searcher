@@ -1,8 +1,11 @@
 package httpserver
 
 import (
-	"github.com/labstack/echo/v4"
 	"net/http"
+
+	"net/http"
+
+	"github.com/labstack/echo/v4"
 )
 
 func (s *Server) AddSwagger() {

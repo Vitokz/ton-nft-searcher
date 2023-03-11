@@ -1,17 +1,18 @@
 package httpserver
 
 import (
-	"github.com/Vitokz/ton-nft-searcher/internal/http_server/transport"
-	"github.com/Vitokz/ton-nft-searcher/internal/http_server/types"
 	"net/http"
 	"strconv"
+
+	"github.com/Vitokz/ton-nft-searcher/internal/http_server/transport"
+	"github.com/Vitokz/ton-nft-searcher/internal/http_server/types"
 
 	"github.com/Vitokz/ton-nft-searcher/internal/protocol"
 	"github.com/labstack/echo/v4"
 	"github.com/tonkeeper/tongo"
 )
 
-// UserNFTs gets user nfts
+// UserNFTs gets user nfts.
 func (s *Server) UserNFTs(c echo.Context) error {
 	// swagger:operation GET /user/nft_items nft_items
 	//
