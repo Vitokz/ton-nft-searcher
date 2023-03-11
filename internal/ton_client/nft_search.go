@@ -2,6 +2,8 @@ package tonclient
 
 import (
 	"context"
+	"github.com/Vitokz/ton-nft-searcher/internal/protocol"
+	"github.com/Vitokz/ton-nft-searcher/internal/ton_client/dto"
 	"net/http"
 	"strconv"
 )

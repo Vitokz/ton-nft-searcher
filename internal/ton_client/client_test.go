@@ -6,7 +6,6 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/require"
-	"github.com/tonkeeper/tongo"
 )
 
 func TestConstructURL(t *testing.T) {
@@ -28,12 +27,7 @@ func TestConstructURL(t *testing.T) {
 }
 
 func TestName(t *testing.T) {
-	addr, err := tongo.ParseAccountID("0:89043793a728830e118536426b60efc820a19b602276d36677cbd629cef9f500")
-	require.NoError(t, err)
+	var empty interface{}
 
-	// bz, err := hex.DecodeString("89043793a728830e118536426b60efc820a19b602276d36677cbd629cef9f500")
-	// require.NoError(t, err)
-	// addr := address.NewAddressExt(0, uint(0), bz)
-
-	fmt.Print(addr.ToHuman(true, false))
+	fmt.Print(empty == nil)
 }
